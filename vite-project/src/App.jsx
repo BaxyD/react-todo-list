@@ -4,11 +4,21 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [newItem, setNewItem] = useState('')
+  const [todos, setTodos] =useState('')
+function handleSubmit(e) {
+  e.preventDefault();
+
+  setTodos (currentTodos => [
+      ...currentTodos,
+      { id: crypto.randomUUID(), title: newItem, completed:
+      false },
+ ]);
+}
 
   return (
     <>
-     <form className='new-item-form'>
+     <form onSubmit={handleSubmit} className='new-item-form'>
         <div className='form-row'>
           <label htmlFor="item">New Item</label>
           <input type="text" id='item' />
@@ -16,21 +26,19 @@ function App() {
         <button className='Btn'>Add</button>
      </form>
      <h1 className='header'>Todo List</h1>
-     <ul>
-      <li>
+     <ul className='list'>
+      {todos.map(todo => {
+        return (
+      
+      <li key={todo.id}>
         <label>
-          <input type="checkbox" />
-          item1
+          <input type="checkbox" checked={todo.completed}/>
+          {todo.title}
         </label>
         <button className='Btn btn-danger'>delete</button>
       </li>
-      <li>
-        <label>
-          <input type="checkbox" />
-          item2
-        </label>
-         <button className='Btn btn-danger'>delete</button>
-      </li>
+      )
+    })}
      </ul>
     </>
   )
