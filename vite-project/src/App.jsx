@@ -8,14 +8,30 @@ function App() {
 
   return (
     <>
-      <h1 className='hello' >hello world</h1>
-      <div className='div' >
-        <div>hi</div>
-        <div>hi</div>
-        <div>hi</div>
-      </div>
-      <button className='btn' onClick='' >click here</button>
-       
+     <form className='new-item-form'>
+        <div className='form-row'>
+          <label htmlFor="item">New Item</label>
+          <input type="text" id='item' />
+        </div>
+        <button className='Btn'>Add</button>
+     </form>
+     <h1 className='header'>Todo List</h1>
+     <ul>
+      <li>
+        <label>
+          <input type="checkbox" />
+          item1
+        </label>
+        <button className='Btn btn-danger'>delete</button>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" />
+          item2
+        </label>
+         <button className='Btn btn-danger'>delete</button>
+      </li>
+     </ul>
     </>
   )
 }
