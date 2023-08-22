@@ -23,9 +23,9 @@ function handleSubmit(e) {
      <form onSubmit={handleSubmit} className='new-item-form'>
         <div className='form-row'>
           <label htmlFor="item">New Item</label>
-          <input type="text" id='item' />
+          <input type="text" id='item' value={newItem} onChange={(e) => setNewItem(e.target.value)} />
         </div>
-        <button className='Btn'>Add</button>
+        <button className='Btn' type='submit' >Add</button>
      </form>
      <h1 className='header'>Todo List</h1>
      <ul className='list'>
@@ -33,6 +33,7 @@ function handleSubmit(e) {
         return (
       
       <li key={todo.id}>
+        {todo.title}
         <label>
           <input type="text" id='item' value={newItem} onChange={(e) => setNewItem(e.target.value)}/>
         </label>
