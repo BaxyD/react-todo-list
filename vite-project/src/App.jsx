@@ -5,15 +5,17 @@ import './App.css'
 
 function App() {
   const [newItem, setNewItem] = useState('')
-  const [todos, setTodos] =useState('')
+  const [todos, setTodos] =useState([])
 function handleSubmit(e) {
   e.preventDefault();
-
-  setTodos (currentTodos => [
+    if (newItem.trim() !== ''){
+      setTodos (currentTodos => [
       ...currentTodos,
       { id: crypto.randomUUID(), title: newItem, completed:
       false },
- ]);
+     ]);
+     setNewItem('');
+    }
 }
 
   return (
@@ -21,9 +23,9 @@ function handleSubmit(e) {
      <form onSubmit={handleSubmit} className='new-item-form'>
         <div className='form-row'>
           <label htmlFor="item">New Item</label>
-          <input type="text" id='item' />
+          <input type="text" id='item' value={newItem} onChange={(e) => setNewItem(e.target.value)} />
         </div>
-        <button className='Btn'>Add</button>
+        <button className='Btn' type='submit' >Add</button>
      </form>
      <h1 className='header'>Todo List</h1>
      <ul className='list'>
@@ -31,11 +33,11 @@ function handleSubmit(e) {
         return (
       
       <li key={todo.id}>
+        {todo.title}
         <label>
-          <input type="checkbox" checked={todo.completed}/>
-          {todo.title}
+          <input type="text" id='item' value={newItem} onChange={(e) => setNewItem(e.target.value)}/>
         </label>
-        <button className='Btn btn-danger'>delete</button>
+        <button className='Btn btn-danger' onClick={() => setTodos(currentTodos=> currentTodos.filter(t=> t.id!== todo.id))} >delete</button>
       </li>
       )
     })}
